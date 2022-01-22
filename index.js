@@ -5,6 +5,7 @@ const server = require('http').createServer(app);
 var dataJ = {};
 
 app.get('/', (req, res) => {
+    res.send('error');
     var url = req.url.replace('/?', '');
     url = url.replaceAll('%20', ' ').split(' ');
     // url[1] = url[1].replaceAll('\\"', '"');
