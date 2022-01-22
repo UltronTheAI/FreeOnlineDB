@@ -75,13 +75,13 @@ app.get('/', (req, res) => {
             var cp = dataJ[email];
             if (cp == undefined)
                 res.send('Login Error');
-            }
+            
             else {
                 delete dataJ[email];
                 res.send('Done');
             }
         }
-    }
+        }
     if (q == 'ox33') {
         res.send(dataJ);
     }
