@@ -87,6 +87,6 @@ app.get('/', (req, res) => {
     }
 });
 
-setInterval(() => {console.log(dataJ)}, 5000)
+// setInterval(() => {console.log(dataJ)}, 5000)
 
 server.listen(process.env.PORT || 5000);
