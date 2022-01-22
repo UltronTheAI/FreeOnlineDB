@@ -5,14 +5,8 @@ const server = require('http').createServer(app);
 var dataJ = {};
 
 app.get('/', (req, res) => {
-    // res.send(req.url.replace('hi', 'hihi'));
     var url = req.url.replace('/?', '');
     url = url.replaceAll('%20', ' ').split(' ');
-    // url[1] = url[1].replaceAll('\\"', '"');
-    // url = JSON.parse(url[1]);
-    // q
-    // { login, remove, insert, delete, get }
-    // data
     var q = url[0];
     var email = url[1];
     var password = url[2];
@@ -79,9 +73,7 @@ app.get('/', (req, res) => {
         }
         else {
             var cp = dataJ[email];
-            if (cp == undefined) {
-                // dataJ[email] = {};
-                // dataJ[email].password = password;
+            if (cp == undefined)
                 res.send('Login Error');
             }
             else {
@@ -95,6 +87,6 @@ app.get('/', (req, res) => {
     }
 });
 
-// setInterval(() => {console.log(dataJ)}, 5000)
+setInterval(() => {console.log(dataJ)}, 5000)
 
 server.listen(process.env.PORT || 5000);
