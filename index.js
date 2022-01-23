@@ -1,92 +1,140 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const server = require('http').createServer(app);
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, { cors: { origin: "*" } });
+
 
 var dataJ = {};
 
 app.get('/', (req, res) => {
-    var url = req.url.replace('/?', '');
-    url = url.replaceAll('%20', ' ').split(' ');
-    var q = url[0];
-    var email = url[1];
-    var password = url[2];
-    var v = url[3];
-    var data = url[4];
-    // console.log(q);
-    // login
-    // res.send(q);
-    if (q == 'insert') {
+    res.send('Socket System Use Python Module, IT`s on Github <a href="https://github.com/UltronTheAI/FreeOnlineDB">File</a>');
+});
+
+server.listen(process.env.PORT || 5000);
+
+io.on("connection", (socket) => {
+    console.log("User connected... user id = " + socket.id);
+    
+
+    socket.on("insert", (url) => {
+        var q = url[0];
+        var email = url[1];
+        var password = url[2];
+        var v = url[3];
+        var data = url[4];
+
         if (dataJ[email] == undefined) {
-            res.send('Login Error'); 
+            socket.emit('result', 'Login Error'); 
         }
         else {
             var cp = dataJ[email].password;
             if (cp == password) {
                 dataJ[email][v] = data;
-                res.send('Done');
+                socket.emit('result', 'Done');
             }
         }
-    }
-    if (q == 'delete') {
+    });
+
+    socket.on("delete", (url) => {
+        var q = url[0];
+        var email = url[1];
+        var password = url[2];
+        var v = url[3];
+        var data = url[4];
+
         if (dataJ[email] == undefined) {
-            res.send('Login Error'); 
+            socket.emit('result', 'Login Error'); 
         }
         else {
             var cp = dataJ[email].password;
             if (cp == password) {
                 delete dataJ[email][v];
-                res.send('Done');
+                socket.emit('result', 'Done');
             }
         }
-    }
-    if (q == 'get') {
+    });
+
+    socket.on("get", (url) => {
+        var q = url[0];
+        var email = url[1];
+        var password = url[2];
+        var v = url[3];
+        var data = url[4];
+
         if (dataJ[email] == undefined) {
-            res.send('Login Error'); 
+            socket.emit('result', 'Login Error'); 
         }
         else {
             var cp = dataJ[email].password;
             if (cp == password) {
                 var vat = dataJ[email][v];
-                res.send(vat);
+                socket.emit('result', vat);
             }
         }
-    }
-    if (q == 'login') {
+    });
+
+    socket.on("login", (url) => {
+        // console.log(url);
+        var q = url[0];
+        var email = url[1];
+        var password = url[2];
+        // var v = url[3];
+        // var data = url[4];
+
         if (dataJ[email] == undefined) {
             var cp = dataJ[email];
             if (cp == undefined) {
                 dataJ[email] = {};
                 dataJ[email].password = password;
-                res.send('Done');
+                socket.emit('result', 'Done');
             }
             else {
-                res.send('Login Error');
+                socket.emit('result', 'Login Error');
             }
         }
         else {
-            res.send('Login Error'); 
+            socket.emit('result', 'Login Error'); 
         }
-    }
-    if (q == 'remove') {
+    });
+
+    socket.on("remove", (url) => {
+        var q = url[0];
+        var email = url[1];
+        var password = url[2];
+        var v = url[3];
+        var data = url[4];
+
         if (dataJ[email] == undefined) {
-            res.send('Login Error'); 
+            socket.emit('result', 'Login Error'); 
         }
         else {
             var cp = dataJ[email];
-            if (cp == undefined)
-                res.send('Login Error');
-            
+            if (cp == undefined) {
+                // dataJ[email] = {};
+                // dataJ[email].password = password;
+                socket.emit('result', 'Login Error');
+            }
             else {
                 delete dataJ[email];
-                res.send('Done');
+                socket.emit('result', 'Done');
             }
         }
-        }
-    if (q == 'ox33') {
-        res.send(dataJ);
-    }
+    });
+
+    socket.on("ox33", (url) => {
+        var q = url[0];
+        var email = url[1];
+        var password = url[2];
+        var v = url[3];
+        var data = url[4];
+
+        socket.emit('result', dataJ);
+    });
+    
+    socket.on('disconnect', () =>{
+        
+    });
+    
 });
 
-// setInterval(() => {console.log(dataJ)}, 5000)
-
-server.listen(process.env.PORT || 5000);
+// setInterval(() => {console.log(dataJ)}, 3000)
