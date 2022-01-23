@@ -7,7 +7,7 @@ const io = require("socket.io")(server, { cors: { origin: "*" } });
 var dataJ = {};
 
 app.get('/', (req, res) => {
-    res.send('Socket System Use Python Module, IT`s on Github <a href="https://github.com/UltronTheAI/FreeOnlineDB">File</a>');
+    res.send('Socket System Use Python Module, IT`s on Github <a href="https://raw.githubusercontent.com/UltronTheAI/FreeOnlineDB/main/FreeOnlineDB.py">File</a>');
 });
 
 server.listen(process.env.PORT || 5000);
