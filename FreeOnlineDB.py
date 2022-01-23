@@ -13,6 +13,7 @@ import requests
     # Insert = To Insert Data To Db To Insert Pass Data To Function (var, data)
     # Get = To Get Data To Db To Get Pass Data To Function (var)
     # Delete = To delete Data To Db To Delete Pass Data To Function (var)
+    # Querry = All
   
   
   
@@ -62,7 +63,7 @@ class DB:
     username = None
     password = None
     
-    def Login(self, user, pass_):
+    def Login(self, user = '', pass_ = ''):
         
         self.username = user
         self.password = pass_
@@ -90,3 +91,4 @@ class DB:
     def Remove(self):
         
         DBURLReq(f'remove {self.username} {self.password}')
+        
