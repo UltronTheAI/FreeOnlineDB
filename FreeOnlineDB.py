@@ -67,7 +67,7 @@ class DB:
         self.username = user
         self.password = pass_
         
-    def Create(self, user, pass_):
+    def Create(self, user = '', pass_ = ''):
 
         DBURLReq(f'login {self.username} {self.password}')
         
