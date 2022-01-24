@@ -1,14 +1,9 @@
 # import requests
 from subprocess import Popen, PIPE
-import os
+# import os
 
 
-path = os.getenv('fodb')
-# print(path)
-if path == None:
-    opp = input('Set " fodb " env = This dir path y/n?>')
-    if opp == 'y':
-        os.environ['fodb'] = input('Path>')
+path = ''
 #   USE DB
 
 #  Use DB Class
@@ -26,10 +21,11 @@ if path == None:
 def DBURLReq(url_):
     url = url_.split(' ')
     # print('{"data": '+str(url).replace('\'', '"')+'}')
-    f = open(path + '\\qurry.qurry', 'w')
+    f = open(path + 'qurry.qurry', 'w')
+    # print('{"data": '+str(url).replace('\'', '"')+'}')
     f.write('{"data": '+str(url).replace('\'', '"')+'}')
     f.close()
-    pipe = Popen(path + '\\API.exe', stdout=PIPE)
+    pipe = Popen(path + 'API.exe', stdout=PIPE)
     text = pipe.communicate()[0]
     # text = text.replace('b\'', '').replace('\\n\'', '')
     text = list(str(text))
@@ -47,12 +43,12 @@ def DBURLReq(url_):
     return nt
 
 
-internet = False
-try:
-    DBURLReq('ox33')
-    internet = True
-except:
-    internet = True  # True
+# internet = False
+# try:
+#     # DBURLReq('ox33')
+#     internet = True
+# except:
+#     internet = True  # True
 
 
 class DB:
@@ -67,7 +63,7 @@ class DB:
 
     def Create(self, user='', pass_=''):
 
-        return DBURLReq(f'login {self.username} {self.password}')
+        return DBURLReq(f'login None {self.username} {self.password}')
 
     def Querry(self, string):
 
@@ -75,16 +71,16 @@ class DB:
 
     def Get(self, variable='', value=''):
 
-        return DBURLReq(f'get {self.username} {self.password} {variable} {value}')
+        return DBURLReq(f'get None {self.username} {self.password} {variable} {value}')
 
     def Insert(self, variable='', value=''):
 
-        return DBURLReq(f'insert {self.username} {self.password} {variable} {value}')
+        return DBURLReq(f'insert None {self.username} {self.password} {variable} {value}')
 
     def Delete(self, variable='', value=''):
 
-        return DBURLReq(f'delete {self.username} {self.password} {variable} {value}')
+        return DBURLReq(f'delete None {self.username} {self.password} {variable} {value}')
 
     def Remove(self):
 
-        return DBURLReq(f'remove {self.username} {self.password}')
+        return DBURLReq(f'remove None {self.username} {self.password}')
