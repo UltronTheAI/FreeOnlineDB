@@ -1,6 +1,7 @@
 # FreeOnlineDB
 Use This DB For Free And Save You`r app data here, But plz Dont Save " email password "
-#Python Module Insert Function IS Not Working, I will Fix IT... But For Now You Can Use API To Insert...
+
+# Python Module Insert Function IS Not Working, I will Fix IT... But For Now You Can Use API To Insert...
 
 Server lik https://free-online-db.herokuapp.com/
 
